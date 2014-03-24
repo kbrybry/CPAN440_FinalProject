@@ -12,9 +12,9 @@ package com.personalClasses;
  */
 public class Room {
     String type,description;
-    double price;
+    float price;
 
-    public Room(String type, String description, double price) {
+    public Room(String type, String description, float price) {
         this.type = type;
         this.description = description;
         this.price = price;
@@ -42,7 +42,7 @@ public class Room {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
     
