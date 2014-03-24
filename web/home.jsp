@@ -4,8 +4,9 @@
     Author     : seang_000
 --%>
 
+<%@page import="database.manager.RoomDisplayManager"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.person.Person"%>
+<%@page import="com.personalClasses.*"%>
 
 <!DOCTYPE html>
 <html>
@@ -20,7 +21,7 @@
     <body>
    
        
-   <jsp:useBean id="p" class="com.person.Person" scope="session" />
+   <jsp:useBean id="p" class="com.personalClasses.Person" scope="session" />
    <% if (session.getAttribute("user") != null){ %>
     <jsp:setProperty name="p" property="email"     value="<%= session.getAttribute("user")%>" />
     <jsp:setProperty name="p" property="firstName" value="<%= session.getAttribute("first")%>"/>
@@ -104,29 +105,27 @@
     <div class="row clearfix">
 		<div class="col-md-12 column">
 			<div class="panel-group" id="panel-47844">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						 <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-47844" href="#panel-element-313912">Collapsible Group Item #1</a>
-					</div>
-					<div id="panel-element-313912" class="panel-collapse collapse">
-						<div class="panel-body">
-							Anim pariatur cliche...
-						</div>
-					</div>
-				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						 <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-47844" href="#panel-element-61067">Collapsible Group Item #2</a>
-					</div>
-					<div id="panel-element-61067" class="panel-collapse collapse">
-						<div class="panel-body">
-							Anim pariatur cliche...
-						</div>
-					</div>
-				</div>
+                            
+                            
+                                <% RoomDisplayManager rm = new RoomDisplayManager();
+                                int i = 0;
+                                 for (Room room : rm.getAllTheRooms()){%>
+				<%= "<div class=\"panel panel-default\">" %>
+					<%= "<div class=\"panel-heading\">" %>
+						 <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-47844" href="#panel-element-<%=i%>"><%= room.getType() %></a>
+					<%= "</div>" %>
+					<div id="panel-element-<%=i%>" class="panel-collapse collapse">
+						<%= "<div class=\"panel-body\">" %>
+							<%= room.getDescription() + "         " + room.getPrice() %> 
+						<%= "</div>" %>
+					<%= "</div>" %>
+			</div>
+                                <%i++; } %>
+				
 			</div>
 		</div>
 	</div>
+    <!--end of list-->
 </div><!-- end of container -->
     </body>
 </html>

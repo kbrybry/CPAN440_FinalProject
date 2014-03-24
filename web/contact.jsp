@@ -19,7 +19,7 @@
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <jsp:useBean id="p" class="com.person.Person" scope="session" />
+        <jsp:useBean id="p" class="com.personalClasses.Person" scope="session" />
         <% boolean guest = false; %>
         <% if (p.getFirstName().equals("GUEST")) {
                 guest = true;
@@ -167,7 +167,7 @@
                                                                 message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
                                                                 message.setSubject(subject);
                                                                 if (reference != null) {
-                                                                    message.setText("Booking reference:" + reference + "\r\n\r\n" + messageText);
+                                                                    message.setText(from + "Booking reference:" + reference + "\r\n\r\n" + messageText);
                                                                 } else {
                                                                     message.setText(messageText);
                                                                 }

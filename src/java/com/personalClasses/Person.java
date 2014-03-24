@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.person;
+package com.personalClasses;
 import database.manager.DataManager;
 /**
  *

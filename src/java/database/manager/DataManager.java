@@ -8,13 +8,14 @@ package database.manager;
 
 import java.sql.*;
 
+
 public class DataManager {
     
     final String url = "jdbc:oracle:thin:@dilbert.humber.ca:1521:grok";
     final String user = "grvs0071";
     final String pass = "oracle";
     protected String error = "Nothing is wrong";
-
+    
     Connection conn = null;
     PreparedStatement stmt;
     String sql;

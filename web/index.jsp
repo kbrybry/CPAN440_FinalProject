@@ -4,6 +4,11 @@
     Author     : seang_000
 --%>
 
+<%@page import="javax.naming.InitialContext"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="javax.activation.DataSource"%>
+<%@page import="javax.naming.Context"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -32,6 +37,7 @@
             <%
             }
             session.removeAttribute("fail");
+          
             %>
         </label>
         <br>
