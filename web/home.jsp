@@ -28,7 +28,7 @@
         <jsp:setProperty name="p" property="firstName" value="<%= session.getAttribute("first")%>"/>
         <jsp:setProperty name="p" property="lastName"  value="<%= session.getAttribute("last")%>"/>
         <%
-   } else { %>
+        } else { %>
         <jsp:setProperty name="p" property="email"     value="GUEST" />
         <jsp:setProperty name="p" property="firstName" value="GUEST"/>
         <jsp:setProperty name="p" property="lastName"  value="GUEST"/>
@@ -72,7 +72,7 @@
                                         <% if (guest) {%>
                                         <%= p.getFirstName()%>
                                         <%
-                                                        } else if (!guest) {%>
+                                        } else if (!guest) {%>
                                         <%= p.getFirstName() + " " + p.getLastName()%>
                                         <%
                                             }
@@ -85,7 +85,7 @@
                                                     <% if (guest) {%>
                                                     <%= "SIGN IN"%>
                                                     <%
-                                                                        } else {%>
+                                                    } else {%>
                                                     <%= "SIGN OUT"%>
                                                     <%
                                                         }
@@ -109,20 +109,20 @@
 
 
                                                 <% RoomDisplayManager rm = new RoomDisplayManager();
-                                    int i = 0;
-                                    for (Room room : rm.getAllTheRooms()) {%>
+                                                    int i = 0;
+                                                    for (Room room : rm.getAllTheRooms()) {%>
                                                 <%= "<div class=\"panel panel-default\">"%>
                                                 <%= "<div class=\"panel-heading\">"%>
                                                 <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-47844" href="#panel-element-<%=i%>">Room Type: <%= room.getType()%></a>
                                                 <%= "</div>"%>
                                                 <%= "<div id=\"panel-element-"%><%= i + "\""%><%= " class=\"panel-collapse collapse\">"%>
                                                 <%= "<div class=\"panel-body\">"%>
-                                                <%= "<strong>Description:</strong> " + room.getDescription() + "<br><br><strong>Price:</strong>$" + df.format(room.getPrice()) + " per night" %> 
+                                                <%= "<strong>Description:</strong> " + room.getDescription() + "<br><br><strong>Price:</strong>$" + df.format(room.getPrice()) + " per night"%> 
                                                 <%= "</div>"%>
                                                 <%= "</div>"%>
                                                 <%= "</div>"%>
                                                 <%i++;
-                                    }%>
+                                                    }%>
 
                                             </div>
                                         </div>
