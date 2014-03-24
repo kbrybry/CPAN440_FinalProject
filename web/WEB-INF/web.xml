@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>confirmRegistration</servlet-name>
+        <servlet-class>servlets.ConfirmRegistration</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>confirmSignIn</servlet-name>
+        <servlet-class>servlets.ConfirmSignIn</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>Redirect</servlet-name>
+        <servlet-class>servlets.Redirect</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>confirmRegistration</servlet-name>
+        <url-pattern>/confirmRegistration.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>confirmSignIn</servlet-name>
+        <url-pattern>/home.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Redirect</servlet-name>
+        <url-pattern>/redirect.html</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
