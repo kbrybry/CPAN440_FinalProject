@@ -114,18 +114,19 @@
 					<%= "<div class=\"panel-heading\">" %>
 						 <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-47844" href="#panel-element-<%=i%>"><%= room.getType() %></a>
 					<%= "</div>" %>
-					<div id="panel-element-<%=i%>" class="panel-collapse collapse">
+                                        <%= "<div id=\"panel-element-" %><%= i + "\"" %><%= " class=\"panel-collapse collapse\">" %>
 						<%= "<div class=\"panel-body\">" %>
-							<%= room.getDescription() + "         " + room.getPrice() %> 
+							<%= room.getDescription() + " " + room.getPrice() %> 
 						<%= "</div>" %>
 					<%= "</div>" %>
-			</div>
+		
                                 <%i++; } %>
 				
 			</div>
 		</div>
 	</div>
     <!--end of list-->
+   
 </div><!-- end of container -->
-    </body>
+</body>
 </html>
