@@ -23,7 +23,7 @@
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     </head>
     <body>
-    <jsp:useBean id="p" class="com.person.Person" scope="application" />
+    <jsp:useBean id="p" class="com.personalClasses.Person" scope="application" />
    <% if (session.getAttribute("user") != null){ %>
     <jsp:setProperty name="p" property="email"     value="<%= session.getAttribute("user")%>" />
     <jsp:setProperty name="p" property="firstName" value="<%= session.getAttribute("first")%>"/>
@@ -68,8 +68,8 @@
 							<a href="#">Contact Us</a>
 						</li>
 							</ul>
-						</li>
-					</ul>
+						
+					
 					<form class="navbar-form navbar-left" role="search">
 						<div class="form-group">
 							<input type="text" class="form-control" />
@@ -124,7 +124,7 @@
 						</div> <button type="submit" class="btn btn-default" name="submitQuery">Submit</button>
 					</form>
                                     <%
-                                     RoomManager rm = new RoomManager();
+                                     RoomBookingManager rm = new RoomBookingManager();
                                      String submitButton = request.getParameter("submitQuery");
                                      String checkInDate = request.getParameter("checkInDate");
                                      ArrayList<String> rooms = new ArrayList();
