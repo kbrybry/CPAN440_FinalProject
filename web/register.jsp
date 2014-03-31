@@ -15,9 +15,10 @@
     </head>
     <body>
         <div class="container">
+      <!-- Form method for user registration -->
       <form class="form-signin" role="form" method="POST" action="confirmRegistration.html">
         <h2 class="form-signin-heading">Register instantly!</h2>
-        <input type="email" class="form-control" placeholder=" Enter Email address" required autofocus name="email">
+        <input type="email" class="form-control" placeholder="Enter Email address" required autofocus name="email">
         <input type="text" class="form-control" placeholder="Enter First Name" name="first" required>
         <input type="text" class="form-control" placeholder="Enter Last Name" name="last" required>
         <input type="password" class="form-control" placeholder="Password" name="pass" required>

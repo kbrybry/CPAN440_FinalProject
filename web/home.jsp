@@ -83,10 +83,10 @@
                                             <form class="navbar-form navbar-left" role="search" method="POST" action="redirect.html">
                                                 <button type="submit" class="btn btn-default" id="sign">
                                                     <% if (guest) {%>
-                                                    <%= "SIGN IN"%>
+                                                    <%= "Sign in"%>
                                                     <%
                                                     } else {%>
-                                                    <%= "SIGN OUT"%>
+                                                    <%= "Sign out"%>
                                                     <%
                                                         }
                                                     %>
@@ -117,7 +117,7 @@
                                                 <%= "</div>"%>
                                                 <%= "<div id=\"panel-element-"%><%= i + "\""%><%= " class=\"panel-collapse collapse\">"%>
                                                 <%= "<div class=\"panel-body\">"%>
-                                                <%= "<strong>Description:</strong> " + room.getDescription() + "<br><br><strong>Price:</strong>$" + df.format(room.getPrice()) + " per night"%> 
+                                                <%= "<strong>Description:</strong> " + room.getDescription() + "<br><br><strong>Price:</strong> $" + df.format(room.getPrice()) + " per night"%> 
                                                 <%= "</div>"%>
                                                 <%= "</div>"%>
                                                 <%= "</div>"%>

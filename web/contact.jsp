@@ -67,10 +67,10 @@
                                             <form class="navbar-form navbar-left" role="search" method="POST" action="redirect.html">
                                                 <button type="submit" class="btn btn-default" id="sign">
                                                     <% if (guest) {%>
-                                                    <%= "SIGN IN"%>
+                                                    <%= "Sign in"%>
                                                     <%
                                                     } else {%>
-                                                    <%= "SIGN OUT"%>
+                                                    <%= "Sign out"%>
                                                     <%
                                                         }
                                                     %>
@@ -95,7 +95,7 @@
                                                         <h1>Contact us!</h1>
                                                         <br>
                                                         <br>
-                                                        <p>Do you have any general inquiries,concerns or requests?
+                                                        <p>Do you have any general inquiries, concerns or requests?
                                                             <br><br>
                                                             <br>Send us a message! We will work with you to make your stay as wonderful as we can!
                                                             <br><br>
@@ -172,7 +172,7 @@
                                                                     message.setText(messageText);
                                                                 }
                                                                 Transport.send(message);
-                                                                result = "Your e-mail has been sent to us! A team of highly skilled monkeys lead by <strong>Joshua Balid</strong> will reply to you as soon as possible!";
+                                                                result = "Your e-mail has been sent to us! A team of highly skilled monkeys lead by <strong>Joshua Balid</strong> will reply to you as soon as possible! If he cannot perform the task Kuya will jump in and save the day!";
                                                             }
                                                         } catch (MessagingException mex) {
                                                             mex.printStackTrace();

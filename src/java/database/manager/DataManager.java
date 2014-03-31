@@ -11,6 +11,7 @@ import java.sql.*;
 
 public class DataManager {
     
+    // connection to database
     final String url = "jdbc:oracle:thin:@dilbert.humber.ca:1521:grok";
     final String user = "grvs0071";
     final String pass = "oracle";

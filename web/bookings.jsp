@@ -90,10 +90,10 @@
                                                                 <form class="navbar-form navbar-left" role="search" method="POST" action="redirect.html">
 								 <button type="submit" class="btn btn-default" id="sign">
                                                                     <% if (guest){ %>
-                                                                        <%= "SIGN IN" %>
+                                                                        <%= "Sign in" %>
                                                                         <%
                                                                         }else{%>
-                                                                           <%= "SIGN OUT" %>
+                                                                           <%= "Sign out" %>
                                                                             <%
                                                                             }
                                                                             %>
