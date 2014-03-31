@@ -95,7 +95,7 @@ public class RoomBookingManager extends DataManager {
                 stmt.setDate(4, co);
                 rs = stmt.executeQuery();
                 while (rs.next()) {
-                    rooms.add(rs.getString("roomid"));
+                    rooms.add(rs.getString("roomtype"));
                 }
         }
              catch (SQLException e) {

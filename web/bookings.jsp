@@ -66,10 +66,8 @@
 						</li>
                                                 <li>
 							<a href="#">Contact Us</a>
-						</li>
-							</ul>
-						
-					
+                                                </li>
+                                        </ul>
 					<form class="navbar-form navbar-left" role="search">
 						<div class="form-group">
 							<input type="text" class="form-control" />
@@ -137,7 +135,21 @@
                                          
                                         
                                          for(int i = 0; i < rooms.size(); i++) {
-                                            out.println(rooms.get(i));
+                                         %>
+                                         <table border="1">
+                                             <tr>
+                                                 <th>Type</th>
+                                                 <th>Desc</th>
+                                             </tr>
+                                             <tr>
+                                                 <td><%out.println(rooms.get(i));%></td>
+                                                 <td></td>
+                                                 <td><a href="" >Book Room</a></td>
+                                             </tr>
+                                             
+                                         </table>
+                                         <%
+                                            //out.println(rooms.get(i));
                                          }
                                          //out.println(newe);
                                          
