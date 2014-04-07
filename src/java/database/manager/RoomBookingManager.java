@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -71,8 +72,8 @@ public class RoomBookingManager extends DataManager {
         super();
     }
 
-    public ArrayList getAvailableRooms(String checkInDate, String checkOutDate) throws ParseException {
-        ArrayList<String> rooms = new ArrayList();
+    public HashMap getAvailableRooms(String checkInDate, String checkOutDate) throws ParseException {
+        HashMap rooms = new HashMap();
         try {
             
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -95,7 +96,7 @@ public class RoomBookingManager extends DataManager {
                 stmt.setDate(4, co);
                 rs = stmt.executeQuery();
                 while (rs.next()) {
-                    rooms.add(rs.getString("roomtype"));
+                    rooms.put(rs.getString("roomid"), rs.getString("roomtype"));
                 }
         }
              catch (SQLException e) {

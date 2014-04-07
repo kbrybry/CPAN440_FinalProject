@@ -4,14 +4,15 @@
     Author     : deadeye
 --%>
 
+<%@page import="java.util.HashMap"%>
 <%@page import="java.text.ParseException"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.personalClasses.Person"%>
-<%@page import="database.manager.RoomBookingManager" %>
+<%@page import="com.personalClasses.*"%>
+<%@page import="database.manager.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,7 +24,7 @@
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     </head>
     <body>
-    <jsp:useBean id="p" class="com.personalClasses.Person" scope="application" />
+    <jsp:useBean id="p" class="com.personalClasses.Person" scope="session" />
    <% if (session.getAttribute("user") != null){ %>
     <jsp:setProperty name="p" property="email"     value="<%= session.getAttribute("user")%>" />
     <jsp:setProperty name="p" property="firstName" value="<%= session.getAttribute("first")%>"/>
@@ -37,7 +38,7 @@
    <%
    }
    %>
-   <%! boolean guest = false; %>
+   <% boolean guest = false; %>
    <% if (p.getFirstName().equals("GUEST")){
        guest = true;
    }
@@ -125,16 +126,21 @@
                                      RoomBookingManager rm = new RoomBookingManager();
                                      String submitButton = request.getParameter("submitQuery");
                                      String checkInDate = request.getParameter("checkInDate");
-                                     ArrayList<String> rooms = new ArrayList();
+                                     //ArrayList<String> rooms = new ArrayList();
                                      String checkOutDate = request.getParameter("checkOutDate");
+                                     
+                                     HashMap room = new HashMap();
+                                     boolean standard = false;
+                                     boolean suite = false;
                                      if(submitButton != null) {
-                                        
-                                        
-                                        
-                                         rooms = rm.getAvailableRooms(checkInDate, checkOutDate);
-                                         
-                                        
-                                         for(int i = 0; i < rooms.size(); i++) {
+                                        room = rm.getAvailableRooms(checkInDate, checkOutDate);
+                                        if(room.containsValue("standard")) {
+                                                standard = true;
+                                        }
+                                        if(room.containsValue("suite")) {
+                                                suite = true;
+                                        }
+                                        //for(int i = 0; i < room.size(); i++) {
                                          %>
                                          <table border="1">
                                              <tr>
@@ -142,7 +148,14 @@
                                                  <th>Desc</th>
                                              </tr>
                                              <tr>
-                                                 <td><%out.println(rooms.get(i));%></td>
+                                                 <td><%if(standard){
+                                                        if(suite) {
+                                                            out.println("Standard / Suite");
+                                                        }
+                                                        else {
+                                                            out.println("Standard");
+                                                        }
+                                                     }%></td>
                                                  <td></td>
                                                  <td><a href="" >Book Room</a></td>
                                              </tr>
@@ -150,7 +163,7 @@
                                          </table>
                                          <%
                                             //out.println(rooms.get(i));
-                                         }
+                                         //}
                                          //out.println(newe);
                                          
                                          //out.println(newe);
