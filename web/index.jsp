@@ -9,8 +9,10 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="javax.activation.DataSource"%>
 <%@page import="javax.naming.Context"%>
+<%@page import="database.manager.UserManager"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -21,6 +23,8 @@
   </head>
   <body>
     <div class="container">
+       <jsp:useBean id="db" class="database.manager.UserManager" scope="session" />
+       <% db.openPool(); %>
       <form class="form-signin" role="form" method="POST" action="home.html">
         <h2 class="form-signin-heading">Please sign in</h2>
         <input type="email" class="form-control" placeholder="Email address" name="email" required autofocus>

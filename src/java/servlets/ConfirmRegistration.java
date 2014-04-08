@@ -6,6 +6,7 @@
 
 package servlets;
 
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import database.manager.UserManager;
 import javax.servlet.http.HttpSession;
+import javax.xml.crypto.Data;
 
 /**
  *
@@ -33,10 +35,10 @@ public class ConfirmRegistration extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
-    private final UserManager db;
+    //private final UserManager db;
 
     public ConfirmRegistration() {
-        this.db = new UserManager();
+        
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -47,7 +49,7 @@ public class ConfirmRegistration extends HttpServlet {
         String password = request.getParameter("pass");
         String confirm = request.getParameter("confirm");
         
-        
+        UserManager db = (UserManager) request.getSession().getAttribute("db");
         try (PrintWriter out = response.getWriter()) {
             if(confirm.equals(password)){
                 if(db.createNewUser(user, firstName, lastName, password)){

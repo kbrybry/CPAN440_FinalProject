@@ -33,15 +33,16 @@ public class ConfirmSignIn extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
-    private final UserManager db = new UserManager();
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String user = request.getParameter("email");
         String password = request.getParameter("pass");
         
-        
+        UserManager db = (UserManager) request.getSession().getAttribute("db");
         try (PrintWriter out = response.getWriter()) {
+        
             if(db.authenticateUser(user, password)){
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);

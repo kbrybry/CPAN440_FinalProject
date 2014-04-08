@@ -37,9 +37,14 @@ public class DataManager {
     }
     
     //opens connection pool for use
-    public void openPool() throws NamingException{
+    public void openPool(){
+        try{
         this.ctx = new InitialContext();
         ds = (DataSource)ctx.lookup("jdbc/hotelDataSource"); 
+        }
+        catch(NamingException e){
+            error = e.getMessage();
+        }
     }
     //connects to pool
     public void open(){
