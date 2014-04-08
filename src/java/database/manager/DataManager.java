@@ -7,14 +7,17 @@
 package database.manager;
 
 import java.sql.*;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 
 public class DataManager {
     
     // connection to database
-    final String url = "jdbc:oracle:thin:@dilbert.humber.ca:1521:grok";
-    final String user = "grvs0071";
-    final String pass = "oracle";
+    Context ctx; 
+    DataSource ds;
     protected String error = "Nothing is wrong";
     
     Connection conn = null;
@@ -33,19 +36,22 @@ public class DataManager {
         this.error = error;
     }
     
-    
-    //connects to oracle database
+    //opens connection pool for use
+    public void openPool() throws NamingException{
+        this.ctx = new InitialContext();
+        ds = (DataSource)ctx.lookup("jdbc/hotelDataSource"); 
+    }
+    //connects to pool
     public void open(){
         try{
-            Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
-            conn = DriverManager.getConnection(url, user, pass);
+           conn = ds.getConnection("grvs0071","oracle");
         }
-        catch(ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e){
+        catch(SQLException e){
             error = e.toString();
         }
     }
    
-    //closes connection to database
+    //closes connection to pool
     public void close(){
    
         try{
@@ -58,6 +64,7 @@ public class DataManager {
         }
     }
     
+    //closes statement
     public void statementClose(){
         try{
             if(stmt != null){

@@ -64,6 +64,9 @@
                                 <li>
                                     <a href="contact.jsp">Contact Us</a>
                                 </li>
+                                <li>
+                                    <a href="map.jsp">Map</a>
+                                </li>
                             </ul>
 
                             <ul class="nav navbar-nav navbar-right">
@@ -106,9 +109,10 @@
                                     <div class="row clearfix">
                                         <div class="col-md-12 column">
                                             <div class="panel-group" id="panel-47844">
-
-
+                                                <h1> View any of our spectacular rooms we offer!<%= "<a href=\"map.jsp\" class=\"btn btn-info btn-xs pull-right\">Find us!</a>" %></h1> 
+                                                
                                                 <% RoomDisplayManager rm = new RoomDisplayManager();
+                                                        rm.openPool();
                                                     int i = 0;
                                                     for (Room room : rm.getAllTheRooms()) {%>
                                                 <%= "<div class=\"panel panel-default\">"%>
@@ -118,6 +122,7 @@
                                                 <%= "<div id=\"panel-element-"%><%= i + "\""%><%= " class=\"panel-collapse collapse\">"%>
                                                 <%= "<div class=\"panel-body\">"%>
                                                 <%= "<strong>Description:</strong> " + room.getDescription() + "<br><br><strong>Price:</strong> $" + df.format(room.getPrice()) + " per night"%> 
+                                                <%= "<a href=\"bookings.jsp\" class=\"btn btn-info btn-xs pull-right\">Search Availability</a>" %>
                                                 <%= "</div>"%>
                                                 <%= "</div>"%>
                                                 <%= "</div>"%>
@@ -128,7 +133,58 @@
                                         </div>
                                     </div>
                                     <!--end of list-->
-
+                                     
+                                    <!-- descriptive services start -->
+                                    <div class="row clearfix" align="center">
+		<div class="col-md-6 column">
+			<h3>
+				Facilities:
+			</h3>
+			<ul>
+				<li>
+					Kuya Golf Course is the perfect balance of challenge and beauty. Eighteen performance inspiring holes embraced by countless awe inspiring scenic views.
+				</li>
+				<li>
+					Fully equipped gymnasium for people who believe in good health.
+				</li>
+				<li>
+					24 Hour Pool Area Access
+				</li>
+				<li>
+					Kuya Restaurant and Bar serving breakfast, lunch, and dinner.
+				</li>
+				<li>
+					Modern arcade to keep any child busy.
+				</li>
+				
+			</ul>
+		</div>
+		<div class="col-md-6 column">
+			<h3>
+				Services:
+			</h3>
+			<ul>
+				<li>
+					Shuttle service to and from golf course.
+				</li>
+				<li>
+					Personal trainer to help you achieve your goals.
+				</li>
+				<li>
+					Swimming lessons
+				</li>
+				<li>
+					Culinary lessons
+				</li>
+				<li>
+					Wifi Network throughout the hotel
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+                                    
+                                    <!-- descriptive services end -->
                                     </div><!-- end of container -->
                                     </body>
                                     </html>

@@ -40,11 +40,14 @@
 							<a href="gallery.jsp">Gallery</a>
 						</li>
                         <li>
-							<a href="#">Map</a>
+							<a href="bookings.jsp">Bookings</a>
 						</li>
                         <li>
 							<a href="contact.jsp">Contact Us</a>
 						</li>
+                                                <li>
+                                    <a href="map.jsp">Map</a>
+                                </li>
 					</ul>
 					
 					<ul class="nav navbar-nav navbar-right">

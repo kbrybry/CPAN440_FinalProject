@@ -27,3 +27,8 @@ width:150px;
     background: #eee;
     padding:10px;
 }
+
+#map_canvas {
+        width: 1000px;
+        height: 600px;
+      }
