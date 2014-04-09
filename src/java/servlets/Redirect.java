@@ -37,11 +37,17 @@ public class Redirect extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
             
-            
+            String home = request.getParameter("sign");
+            String goAdmin = request.getParameter("goadmin");
         try (PrintWriter out = response.getWriter()) {
+               if (home!= null){
                HttpSession session = request.getSession();
                session.invalidate();
                response.sendRedirect("index.jsp");
+               }
+               else if(goAdmin != null){
+                   response.sendRedirect("admin.jsp");
+               }
             
         }
     }

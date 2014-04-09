@@ -5,7 +5,7 @@
  */
 
 package com.personalClasses;
-import database.manager.DataManager;
+
 /**
  *
  * @author seang_000
@@ -15,9 +15,18 @@ public class Person {
     private String email;
     private String firstName;
     private String lastName;
-    private DataManager db = new DataManager();
+    private String admin;
     
     public Person () {};
+
+    public String getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(String admin) {
+        this.admin = admin;
+    }
+    
     
     public String getEmail() {
         return email;

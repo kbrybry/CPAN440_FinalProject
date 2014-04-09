@@ -14,7 +14,9 @@ body
 }
 
 #sign{
-width:150px;	
+width:150px;
+padding:10px;
+margin-bottom:5px;
 }
 
 #contactform{
@@ -32,3 +34,14 @@ width:150px;
         width: 1000px;
         height: 600px;
       }
+      
+      #nav.affix {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+}
+
+#adminNav{
+   padding-left:100px;
+   
+}

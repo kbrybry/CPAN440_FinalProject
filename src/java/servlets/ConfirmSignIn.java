@@ -48,6 +48,7 @@ public class ConfirmSignIn extends HttpServlet {
                 session.setAttribute("user", user);
                 session.setAttribute("first", db.getFirstName());
                 session.setAttribute("last", db.getLastName());
+                session.setAttribute("admin", db.getAdmin());
                 response.sendRedirect("home.jsp");
             }
             else{

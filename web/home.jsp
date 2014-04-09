@@ -27,17 +27,23 @@
         <jsp:setProperty name="p" property="email"     value="<%= session.getAttribute("user")%>" />
         <jsp:setProperty name="p" property="firstName" value="<%= session.getAttribute("first")%>"/>
         <jsp:setProperty name="p" property="lastName"  value="<%= session.getAttribute("last")%>"/>
+         <jsp:setProperty name="p" property="admin"  value="<%= session.getAttribute("admin")%>"/>
         <%
         } else { %>
         <jsp:setProperty name="p" property="email"     value="GUEST" />
         <jsp:setProperty name="p" property="firstName" value="GUEST"/>
         <jsp:setProperty name="p" property="lastName"  value="GUEST"/>
+        <jsp:setProperty name="p" property="admin"  value="GUEST"/>
         <%
             }
         %>
-        <% boolean guest = false; %>
+        <% boolean guest = false; boolean admin = false;%>
         <% if (p.getFirstName().equals("GUEST")) {
                 guest = true;
+            }
+        
+            if(p.getAdmin().equals("Y")){
+                admin = true;
             }
             DecimalFormat df = new DecimalFormat("#.00");
         %>
@@ -84,7 +90,7 @@
                                     <ul class="dropdown-menu">
                                         <li>
                                             <form class="navbar-form navbar-left" role="search" method="POST" action="redirect.html">
-                                                <button type="submit" class="btn btn-default" id="sign">
+                                                <button type="submit" class="btn btn-default" id="sign" name="sign">
                                                     <% if (guest) {%>
                                                     <%= "Sign in"%>
                                                     <%
@@ -94,9 +100,15 @@
                                                         }
                                                     %>
                                                 </button>
+                                                <% if (admin){%>
+                                                    <%= "<button type=\"submit\" class=\"btn btn-default\" id=\"sign\" name=\"goadmin\"> Admin Page </button>"%>
+                                                <%
+                                                }
+                                                %>
                                             </form>
                                         </li>
 
+                                    </ul>
                                     </ul>
                                     </div>
                                                             
@@ -109,6 +121,7 @@
                                     <div class="row clearfix">
                                         <div class="col-md-12 column">
                                             <div class="panel-group" id="panel-47844">
+                                               
                                                 <h1> View any of our spectacular rooms we offer!<%= "<a href=\"map.jsp\" class=\"btn btn-info btn-xs pull-right\">Find us!</a>" %></h1> 
                                                 
                                                 <% RoomDisplayManager rm = new RoomDisplayManager();

@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class UserManager extends DataManager {
     
-        String email,firstName,lastName;
+        String email,firstName,lastName,admin;
 
     public String getEmail() {
         return email;
@@ -39,6 +39,16 @@ public class UserManager extends DataManager {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public String getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(String admin) {
+        this.admin = admin;
+    }
+    
+    
     public UserManager(){
         super();
     }
@@ -59,10 +69,9 @@ public class UserManager extends DataManager {
          created = true;
          }
         }catch(SQLException e){
-           error = e.toString();
+       
            error = e.getMessage();
-           String pie;
-           pie = "hi";
+           
         }
         finally{
             close();statementClose();
@@ -101,7 +110,7 @@ public class UserManager extends DataManager {
         boolean authenticate = false;
         try {
             open(); 
-            sql = "SELECT userid,firstname,lastname FROM USERS where userid=? AND userpassword=?";
+            sql = "SELECT userid,firstname,lastname,admin FROM USERS where userid=? AND userpassword=?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, userid);
             stmt.setString(2, password);
@@ -112,6 +121,7 @@ public class UserManager extends DataManager {
                 email = rs.getString("USERID");
                 firstName = rs.getString("FIRSTNAME");
                 lastName = rs.getString("LASTNAME");
+                admin = rs.getString("ADMIN");
             }
             
          
