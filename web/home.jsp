@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="java.text.DecimalFormat"%>
-<%@page import="database.manager.RoomDisplayManager"%>
+<%@page import="database.manager.RoomManager"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.personalClasses.*"%>
 
@@ -21,7 +21,8 @@
     </head>
     <body>
 
-
+        <jsp:useBean id="man" class="database.manager.RoomManager" scope="session" />
+        <% man.openPool(); %>
         <jsp:useBean id="p" class="com.personalClasses.Person" scope="session" />
         <% if (session.getAttribute("user") != null) {%>
         <jsp:setProperty name="p" property="email"     value="<%= session.getAttribute("user")%>" />
@@ -53,7 +54,7 @@
                 <div class="col-md-12 column">
                     <nav class="navbar navbar-default" role="navigation">
                         <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#"><strong> Kuya Hotels Inc. &reg;</strong></a>
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="home.jsp"><strong> Kuya Hotels Inc. &reg;</strong></a>
                         </div>
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -124,10 +125,9 @@
                                                
                                                 <h1> View any of our spectacular rooms we offer!<%= "<a href=\"map.jsp\" class=\"btn btn-info btn-xs pull-right\">Find us!</a>" %></h1> 
                                                 
-                                                <% RoomDisplayManager rm = new RoomDisplayManager();
-                                                        rm.openPool();
+                                                <% 
                                                     int i = 0;
-                                                    for (Room room : rm.getAllTheRooms()) {%>
+                                                    for (Room room : man.getAllTheRooms()) {%>
                                                 <%= "<div class=\"panel panel-default\">"%>
                                                 <%= "<div class=\"panel-heading\">"%>
                                                 <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-47844" href="#panel-element-<%=i%>">Room Type: <%= room.getType()%></a>

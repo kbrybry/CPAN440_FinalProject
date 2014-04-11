@@ -45,3 +45,29 @@ margin-bottom:5px;
    padding-left:100px;
    
 }
+
+.roundedArea{
+background: #eee; 
+padding:10px;
+}
+
+.myForm{
+    padding:10px;
+}
+
+.editForm{
+    padding:10px;
+    background:#A9A9A9;
+    padding-top:20px;
+}
+
+.myButtonSeparator{
+    padding:10px;
+  
+}
+
+.myItems{
+    padding:10px;
+    margin-bottom: 10px;
+}
+

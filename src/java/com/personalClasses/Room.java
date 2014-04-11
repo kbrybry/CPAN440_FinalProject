@@ -13,6 +13,15 @@ package com.personalClasses;
 public class Room {
     String type,description;
     float price;
+    int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Room(String type, String description, float price) {
         this.type = type;
@@ -38,7 +47,7 @@ public class Room {
         this.description = description;
     }
 
-    public double getPrice() {
+    public float getPrice() {
         return price;
     }
 
