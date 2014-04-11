@@ -12,6 +12,9 @@ package com.personalClasses;
  */
 public class Person {
 
+    // PERSON CLASS
+    // GETS EMAIL, FIRSTNAME, LASTNAME, ADMIN
+    
     private String email;
     private String firstName;
     private String lastName;
