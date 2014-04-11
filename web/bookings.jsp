@@ -38,74 +38,85 @@
    <%
    }
    %>
-   <% boolean guest = false; %>
-   <% if (p.getFirstName().equals("GUEST")){
-       guest = true;
-   }
-   %>
+   <% boolean guest = false; boolean admin = false;%>
+        <% if (p.getFirstName().equals("GUEST")) {
+                guest = true;
+            }
+        
+            if(p.getAdmin().equals("Y")){
+                admin = true;
+            }
+            
+        %>
         <div class="container">
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<nav class="navbar navbar-default" role="navigation">
-				<div class="navbar-header">
-					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#"><strong> Kuya Hotels Inc. &reg;</strong></a>
-				</div>
-				
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li class="active">
-							<a href="home.jsp">Home</a>
-						</li>
-						<li >
-							<a href="gallery.jsp">Gallery</a>
-						</li>
-                                                
-                                                    <li><a href="bookings.jsp">Bookings</a></li>
-                                                
-                                                <li>
-							<a href="#">Map</a>
-						</li>
-                                                <li>
-							<a href="#">Contact Us</a>
-                                                </li>
-                                        </ul>
-					<form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" />
-						</div> <button type="submit" class="btn btn-default">Submit</button>
-					</form>
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown">
-                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                        <% if (guest){ %>
-                                                         <%= p.getFirstName()  %>
-                                                        <%
-                                                        }else{%>
-                                                         <%= p.getFirstName() + " " + p.getLastName() %>
-                                                        <%
+	<!--   NAVIGATION START -->
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <nav class="navbar navbar-default" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="home.jsp"><strong> Kuya Hotels Inc. &reg;</strong></a>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a href="home.jsp">Home</a>
+                                </li>
+                                <li >
+                                    <a href="gallery.jsp">Gallery</a>
+                                </li>
+                                <li class="active">
+                                    <a href="bookings.jsp">Bookings</a>
+                                </li>
+                                <li>
+                                    <a href="contact.jsp">Contact Us</a>
+                                </li>
+                                <li>
+                                    <a href="map.jsp">Map</a>
+                                </li>
+                            </ul>
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <% if (guest) {%>
+                                        <%= p.getFirstName()%>
+                                        <%
+                                        } else if (!guest) {%>
+                                        <%= p.getFirstName() + " " + p.getLastName()%>
+                                        <%
+                                            }
+                                        %>
+                                        <strong class="caret"></strong></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <form class="navbar-form navbar-left" role="search" method="POST" action="redirect.html">
+                                                <button type="submit" class="btn btn-default" id="sign" name="sign">
+                                                    <% if (guest) {%>
+                                                    <%= "Sign in"%>
+                                                    <%
+                                                    } else {%>
+                                                    <%= "Sign out"%>
+                                                    <%
                                                         }
-                                                        %>
-                                                        <strong class="caret"></strong></a>
-							<ul class="dropdown-menu">
-								<li>
-                                                                <form class="navbar-form navbar-left" role="search" method="POST" action="redirect.html">
-								 <button type="submit" class="btn btn-default" id="sign">
-                                                                    <% if (guest){ %>
-                                                                        <%= "Sign in" %>
-                                                                        <%
-                                                                        }else{%>
-                                                                           <%= "Sign out" %>
-                                                                            <%
-                                                                            }
-                                                                            %>
-                                                                 </button>
-								</form>
-								</li>
-						
-					</ul>
-				</div>
-				
-			</nav>
+                                                    %>
+                                                </button>
+                                                <% if (admin){%>
+                                                    <%= "<button type=\"submit\" class=\"btn btn-default\" id=\"sign\" name=\"goadmin\"> Admin Page </button>"%>
+                                                <%
+                                                }
+                                                %>
+                                            </form>
+                                        </li>
+
+                                    </ul>
+                                    </ul>
+                                    </div>
+                                                            
+                                    </nav>
+                                    </div>
+                                    </div>
+                                    <!-- NAVIGATION END -->
 			<div class="row clearfix">
 				<div class="col-md-12 column">
 					<h3>
