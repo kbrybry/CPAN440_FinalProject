@@ -22,6 +22,22 @@
 	<link href="customCSS/style.css" rel="stylesheet">
 	<script type="text/javascript" src="jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="jquery/themes/base/jquery.ui.all.css">
+	<script src="jquery/jquery-1.10.2.js"></script>
+	<script src="jquery/ui/jquery.ui.core.js"></script>
+	<script src="jquery/ui/jquery.widget.core.js"></script>
+	<script src="jquery/ui/jquery.ui.datepicker.js"></script>
+        <script>
+        $(function() {
+		$( "#datepicker1" ).datepicker({
+			showOn: "button",
+			buttonImage: "images/calendar.gif",
+			buttonImageOnly: true,
+                        minDate: 0,
+                        dateFormat: 'yy-mm-dd'
+		});
+	});
+	</script>
     </head>
     <body>
     <jsp:useBean id="p" class="com.personalClasses.Person" scope="session" />
@@ -119,6 +135,10 @@
                                     <!-- NAVIGATION END -->
 			<div class="row clearfix">
 				<div class="col-md-12 column">
+                                    <form action="datepicker.jsp" method="POST">
+    Date: <input type="text" id="datepicker1" name="datepicker1">
+    <input type="submit" name="hi"/>
+</form>
 					<h3>
 						Check Availability and Rates:
 					</h3>

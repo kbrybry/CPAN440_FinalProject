@@ -198,7 +198,7 @@ public class RoomManager extends DataManager {
         //buttons for form
         form += "<div class=\"form-group myButtonSeparator\">";
         form += "<div class=\"col-sm-offset-2 col-sm-10\">";
-        form += "<button type=\"submit\" class=\"btn btn-warning\" name=\"editEdit\">Edit</button> <br><br>";
+        form += "<button type=\"submit\" class=\"btn btn-warning\" name=\"editEdit\">Edit</button> <button type=\"submit\" class=\"btn btn-primary\" name=\"editCancel\">Cancel</button> <br><br>";
         form += "DANGER! <button type=\"submit\" class=\"btn btn-danger\" name=\"editDelete\">Delete</button> !DANGER";
         form += "</div>";
         form += "</div>";
