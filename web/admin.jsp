@@ -17,7 +17,6 @@
         <link href="customCSS/style.css" rel="stylesheet">
         <script type="text/javascript" src="jquery/jquery.min.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-
         <script type="text/javascript">
 
             $(document).ready(function() {
@@ -25,18 +24,30 @@
                 $('#nav').affix({
                     offset: {top: $('#nav').offset().top}
                 });
-                ​
-
             });
 
         </script>
-
-
+        <link rel="stylesheet" href="jquery/themes/base/jquery.ui.all.css">
+	<script src="jquery/jquery-1.10.2.js"></script>
+	<script src="jquery/ui/jquery.ui.core.js"></script>
+	<script src="jquery/ui/jquery.widget.core.js"></script>
+	<script src="jquery/ui/jquery.ui.datepicker.js"></script>
+        <script>
+        $(function() {
+		$( ".datepicker" ).datepicker({
+			showOn: "button",
+			buttonImage: "images/calendar.gif",
+			buttonImageOnly: true,
+                        dateFormat: 'yy-mm-dd'
+		});
+	});
+	</script>
     </head>
     <body>
         <jsp:useBean id="p" class="com.personalClasses.Person" scope="session" />
         <jsp:useBean id="man" class="database.manager.RoomManager" scope="session" />
-        <%Room rm = null;
+        <jsp:useBean id="rep" class="database.manager.ReportManager" scope="session" />
+        <%Room rm = null; rep.openPool();
             DecimalFormat df = new DecimalFormat("#.00");%>
 
         <% if (!p.getAdmin().equals("Y")) {
@@ -59,7 +70,7 @@
             <!--   NAVIGATION START -->
             <div class="row clearfix">
                 <div class="col-md-12 column">
-                    <nav class="navbar navbar-default navbar-inverse" role="navigation">
+                    <nav class="navbar navbar-default" role="navigation">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="home.jsp"><strong> Kuya Hotels Inc. &reg;</strong></a>
                         </div>
@@ -152,7 +163,21 @@
                                 </div>
                                 <div id="panel-element-909920" class="panel-collapse collapse">
                                     <div class="panel-body">
-                                        Anim pariatur cliche...
+                                        <a class="myItems" href="#roomReport">Room Bookings Reports</a> <br> 
+                                        <ul>
+                                            <li><a class="myItems" href="#roomDateSearch">View By Date</a></li>
+                                            <li><a class="myItems" href="#roomDateFloorSearch">View By Date And Floor</a></li>
+                                        </ul>
+                                        <a class="myItems" href="#salesReport">Sales Reports</a><br>
+                                        <ul>
+                                            <li><a class="myItems" href="#salesDateSearch">View By Date</a></li>
+                                            <li><a class="myItems" href="#salesDateAndPersonSearch">View By Person</a></li>
+                                        </ul>
+                                        
+                                        <a class="myItems" href="#userReport">User Reports</a><br>
+                                        <ul>
+                                            <li><a class="myItems" href="#userView">View Users</a></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -169,6 +194,8 @@
                     <div class="col-md-12 column">
                         <a class="myItems" href="admin.jsp">Refresh</a><br><br>
                         <!-- start of view rooms -->
+                        <div class="img-rounded roundedArea"> 
+                            <h2> View Rooms </h2>
                         <%
                             int i = 0;
                             for (Room room : man.getAllTheRooms()) {%>
@@ -184,8 +211,10 @@
                         <%= "</div>"%>
                         <%i++;
                             }%>
+                        </div>
                         <!-- end of view rooms -->
                         <!--start of edit rooms -->
+                        <br>
                         <div class="img-rounded roundedArea"> 
                             <a name="editRoom"></a>
                             <h1> Edit Room</h1>                           
@@ -240,6 +269,84 @@
                             %>
                         </div>
                         <!-- end of add room -->
+                        
+                        <!-- start of reports-->
+                        <h1>Report Generation Section</h1>
+                        <h2>Room Bookings Reports</h2>
+                         <a name="roomReport"></a>
+                        <!-- start of room reports -->
+                        <!-- start of date search report -->
+                        <div class="img-rounded roundedArea">
+                            <h3>Search by Date:</h3>
+                            <a name="roomDateSearch"></a>
+                            <%= rep.makeRoomDateSearch() %>
+                            <% if(request.getParameter("roomDateSearch")!= null){ %>
+                              <%= rep.getRoomDateSearch(request.getParameter("roomDateStart"),request.getParameter("roomDateEnd")) %>
+                            
+                            <%
+                            }
+                            %>
+                        </div>
+                        <p></p>
+                        <!-- end of date search report -->
+                        <!--start of date and floor search report -->
+                        <div class="img-rounded roundedArea">
+                            <h3>Search by Date and Floor:</h3>
+                            <a name="roomDateFloorSearch"></a>
+                            <%= rep.makeRoomDateAndFloorSearch() %>
+                            <% if(request.getParameter("roomDateAndFloorSearch")!= null){ try{%>
+                            <%= rep.getRoomDateAndFloorSearch(request.getParameter("roomDateAndFloorStart"),request.getParameter("roomDateAndFloorEnd"),Integer.parseInt(request.getParameter("roomDateAndFloorFloor"))) %>
+                            
+                            <%
+                            }
+                            catch(NumberFormatException e){%>
+                              <%= "<p align=\"CENTER\">YOU MUST ENTER A FLOOR NUMBER AS A NUMBER</p>" %>
+                            <%
+                            }
+                            }
+                            %>
+                        </div>
+                        
+                        <!-- end of date and floor search report -->
+                        <!-- end of room reports -->
+                        <!-- start of sales reports -->
+                        <h2>Sales Reports</h2>
+                         <a name="salesReport"></a>
+                         <div class="img-rounded roundedArea">
+                             <h3> Sales Date Search: </h3>
+                            <a name="salesDateSearch"></a>
+                            <%= rep.makeSalesDateSearch() %>
+                            
+                            <% if(request.getParameter("salesDateSearch")!= null){ %>
+                              <%= rep.getSalesDateReport(request.getParameter("salesDateStart"),request.getParameter("salesDateEnd")) %>
+                            
+                            <%
+                            }
+                            %>
+                         </div>
+                         <br>
+                         <div class="img-rounded roundedArea">
+                             <h3> Search by Person and Date: </h3>
+                            <a name="salesDateAndPersonSearch"></a>
+                            <%= rep.makeSalesDateAndPersonSearch() %>
+                            
+                            <% if(request.getParameter("salesDateAndPersonSearch")!= null){ %>
+                            <%= rep.getSalesDateAndPersonReport(request.getParameter("salesDateAndPersonStart"), request.getParameter("salesDateAndPersonEnd"), request.getParameter("item")) %>
+                            
+                            <%
+                            }
+                            %>
+                         </div>
+                         <!-- end of sales reports -->
+                         
+                         <!-- USER REPORTS -->
+                         <div class="img-rounded roundedArea">
+                             <h3> View Users </h3>
+                            <a name="userView"></a>
+                            <%= rep.listUsers() %>
+                         </div>
+                         <!-- END OF USER REPORTS -->
+                        <!-- end of reports -->
                     </div>   
                     <!-- end of right column rooms -->
                 </div>
