@@ -87,6 +87,17 @@ public class ReportManager extends RoomManager {
                 per.setAdmin(rs.getString("admin"));
                 persons.add(per);
             }
+            results = "<table style=\"width:1000px\">";
+            results += "<tr> <th>User ID</th> <th>First Name</th> <th>Last Name</th><th>Admin</th></tr>";
+            for (Person item : persons) {
+                results += "<tr>";
+                results += "<td>" + item.getEmail() + "</td>";
+                results += "<td>" + item.getFirstName() + "</td>";
+                results += "<td>" + item.getLastName() + "</td>";
+                results += "<td>" + item.getAdmin() + "</td>";
+                results += "</tr>";
+            }
+            results += "</table>";
         }
         catch(SQLException e){
             
@@ -107,6 +118,7 @@ public class ReportManager extends RoomManager {
             while (rs.next()) {
                 names.add(rs.getString("userid"));
             }
+            
         }
         catch(SQLException e){
             

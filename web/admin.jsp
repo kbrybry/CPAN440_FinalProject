@@ -339,11 +339,12 @@
                          </div>
                          <!-- end of sales reports -->
                          
+                         <br>
                          <!-- USER REPORTS -->
                          <div class="img-rounded roundedArea">
                              <h3> View Users </h3>
                             <a name="userView"></a>
-                            <%= rep.listUsers() %>
+                            <%= rep.listAllUsers() %>
                          </div>
                          <!-- END OF USER REPORTS -->
                         <!-- end of reports -->
