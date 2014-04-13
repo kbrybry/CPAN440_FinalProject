@@ -14,6 +14,10 @@
         <servlet-name>Redirect</servlet-name>
         <servlet-class>servlets.Redirect</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookingServlet</servlet-name>
+        <servlet-class>servlets.BookingServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>confirmRegistration</servlet-name>
         <url-pattern>/confirmRegistration.html</url-pattern>
@@ -25,6 +29,10 @@
     <servlet-mapping>
         <servlet-name>Redirect</servlet-name>
         <url-pattern>/redirect.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookingServlet</servlet-name>
+        <url-pattern>/bookroom.jsp</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

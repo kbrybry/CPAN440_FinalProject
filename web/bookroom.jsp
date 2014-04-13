@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="java.text.DecimalFormat"%>
-<%@page import="database.manager.RoomDisplayManager"%>
+<%@page import="database.manager.RoomBookingManager"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.personalClasses.*"%>
 
@@ -103,12 +103,12 @@
                                     <!-- NAVIGATION END -->
                                     
                                     <!-- Form START -->
-                                    <form role="form" method="GET" action="bookings.jsp">
+                                    <form role="form" method="GET" action="bookroom.jsp">
 						<div class="form-group">
-							 <label for="exampleInputEmail1">Check-in</label><input type="date" class="form-control" id="checkInDate" name="checkInDate"/>
+							 <label>Check-in</label><input type="date" class="form-control" id="checkInDate" name="checkInDate"/>
 						</div>
 						<div class="form-group">
-							 <label for="exampleInputPassword1">Check-out</label><input type="date" class="form-control" id="checkOutDate" name="checkOutDate"/>
+							 <label>Check-out</label><input type="date" class="form-control" id="checkOutDate" name="checkOutDate"/>
 						</div>
 						<div class="checkbox">
 							 <label><input type="checkbox" /> Check me out</label>

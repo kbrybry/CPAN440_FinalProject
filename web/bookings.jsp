@@ -41,19 +41,7 @@
     </head>
     <body>
     <jsp:useBean id="p" class="com.personalClasses.Person" scope="session" />
-   <% if (session.getAttribute("user") != null){ %>
-    <jsp:setProperty name="p" property="email"     value="<%= session.getAttribute("user")%>" />
-    <jsp:setProperty name="p" property="firstName" value="<%= session.getAttribute("first")%>"/>
-    <jsp:setProperty name="p" property="lastName"  value="<%= session.getAttribute("last")%>"/>
-   <%
-   }
-   else{ %>
-    <jsp:setProperty name="p" property="email"     value="GUEST" />
-    <jsp:setProperty name="p" property="firstName" value="GUEST"/>
-    <jsp:setProperty name="p" property="lastName"  value="GUEST"/>
-   <%
-   }
-   %>
+  
    <% boolean guest = false; boolean admin = false;%>
         <% if (p.getFirstName().equals("GUEST")) {
                 guest = true;
@@ -155,46 +143,72 @@
 					</form>
                                     <%
                                      RoomBookingManager rm = new RoomBookingManager();
+                                     rm.openPool();
                                      String submitButton = request.getParameter("submitQuery");
                                      String checkInDate = request.getParameter("checkInDate");
                                      //ArrayList<String> rooms = new ArrayList();
                                      String checkOutDate = request.getParameter("checkOutDate");
-                                     
-                                     HashMap room = new HashMap();
-                                     boolean standard = false;
-                                     boolean suite = false;
+                                     ArrayList roomIDs = new ArrayList();
+                                     ArrayList floorIDs = new ArrayList();
+                                     ArrayList<Room> rooms = new ArrayList<Room>();
+                                     boolean doubleRoom = false;
+                                     boolean deluxeRoom = false;
+                                     boolean anniversaryRoom = false;
+                                     boolean privateCabanas = false;
+
+                                     ArrayList<Room> roomsToDisplay = new ArrayList<Room>();
                                      if(submitButton != null) {
-                                        room = rm.getAvailableRooms(checkInDate, checkOutDate);
-                                        if(room.containsValue("standard")) {
-                                                standard = true;
+                                        rm.openPool();
+                                         roomIDs = rm.getAvailableRoomIDs(checkInDate, checkOutDate);
+                                        floorIDs = rm.getAvailableFloorIDs(checkInDate, checkOutDate);
+                                        rooms = rm.getRoomDetails(floorIDs, roomIDs);
+                                        for(int i = 0; i < rooms.size(); i++) {
+                                            if(rooms.get(i).getType().equalsIgnoreCase("Double Room") && !doubleRoom) {
+                                                doubleRoom = true;
+                                                roomsToDisplay.add(new Room(rooms.get(i).getType(), rooms.get(i).getDescription(), rooms.get(i).getPrice()));
+                                                
+                                            }
+                                            if(rooms.get(i).getType().equalsIgnoreCase("Deluxe Room") && !deluxeRoom) {
+                                                deluxeRoom = true;
+                                                roomsToDisplay.add(new Room(rooms.get(i).getType(), rooms.get(i).getDescription(), rooms.get(i).getPrice()));
+                                            }
+                                            if(rooms.get(i).getType().equalsIgnoreCase("Anniversary Room") && !anniversaryRoom) {
+                                                anniversaryRoom = true;
+                                                roomsToDisplay.add(new Room(rooms.get(i).getType(), rooms.get(i).getDescription(), rooms.get(i).getPrice()));
+                                            }
+                                            if(rooms.get(i).getType().equalsIgnoreCase("Private Cabanas") && !privateCabanas) {
+                                                privateCabanas = true;
+                                                roomsToDisplay.add(new Room(rooms.get(i).getType(), rooms.get(i).getDescription(), rooms.get(i).getPrice()));
+                                            }
                                         }
-                                        if(room.containsValue("suite")) {
-                                                suite = true;
-                                        }
-                                        //for(int i = 0; i < room.size(); i++) {
+                                        for(int i = 0; i < roomsToDisplay.size(); i++) {
                                          %>
                                          <table border="1">
                                              <tr>
                                                  <th>Type</th>
                                                  <th>Desc</th>
+                                                 <th>Price</th>
                                              </tr>
                                              <tr>
-                                                 <td><%if(standard){
-                                                        if(suite) {
-                                                            out.println("Standard / Suite");
-                                                        }
-                                                        else {
-                                                            out.println("Standard");
-                                                        }
-                                                     }%></td>
-                                                 <td></td>
+                                                 <td>
+                                                     <% out.println(roomsToDisplay.get(i).getType());
+                                                     %>
+                                                 </td>
+                                                 <td>
+                                                     <% out.println(roomsToDisplay.get(i).getDescription());
+                                                     %>
+                                                 </td>
+                                                 <td>
+                                                     <% out.println(roomsToDisplay.get(i).getPrice());
+                                                     %>
+                                                 </td>
                                                  <td><a href="" >Book Room</a></td>
                                              </tr>
                                              
                                          </table>
                                          <%
                                             //out.println(rooms.get(i));
-                                         //}
+                                        }
                                          //out.println(newe);
                                          
                                          //out.println(newe);
