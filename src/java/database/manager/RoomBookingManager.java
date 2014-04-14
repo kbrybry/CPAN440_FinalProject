@@ -203,8 +203,8 @@ public class RoomBookingManager extends DataManager {
                             stmt.setString(6, floor);
                             rs = stmt.executeQuery();
                             if (!rs.next()) {
-                                sql = "INSERT INTO BOOKINGS(checkindate,checkoutdate,floorid,roomid,requests,guests,userid) VALUES(?,?,?,?,?,?,?)";
-                                stmt = conn.prepareStatement(sql);
+                                
+                                stmt = conn.prepareStatement("INSERT INTO BOOKINGS(checkindate,checkoutdate,floorid,roomid,requests,guests,userid) VALUES(to_date(?,'yyyy-mm-dd'),to_date(?,'yyyy-mm-dd'),?,?,?,?,?)");
                                 stmt.setString(1, dateIn);
                                 stmt.setString(2, dateOut);
                                 stmt.setString(3, floor);
@@ -260,7 +260,7 @@ public class RoomBookingManager extends DataManager {
 
                         if (!booked) {
                             for (String room : rooms) {
-                                stmt = conn.prepareStatement("SELECT * FROM BOOKINGS JOIN roomlisting USING (floorid,roomid) WHERE (checkindate BETWEEN ? AND ? OR checkoutdate BETWEEN ? AND ?) AND roomid=? AND floorid=?");
+                                stmt = conn.prepareStatement("SELECT * FROM BOOKINGS JOIN roomlisting USING (floorid,roomid) WHERE (checkindate BETWEEN to_date(?,'yyyy-mm-dd') AND to_date(?,'yyyy-mm-dd') OR checkoutdate BETWEEN to_date(?,'yyyy-mm-dd') AND to_date(?,'yyyy-mm-dd')) AND roomid=? AND floorid=?");
                                 stmt.setString(1, dateIn);
                                 stmt.setString(2, dateOut);
                                 stmt.setString(3, dateIn);
