@@ -150,7 +150,7 @@ public class EditBookingsManager extends DataManager {
 
                     if (!booked) {
                         for (String room : rooms) {
-                            stmt = conn.prepareStatement("SELECT * FROM BOOKINGS JOIN roomlisting USING (floorid,roomid) WHERE checkindate BETWEEN ? AND ? AND checkoutdate BETWEEN ? AND ? AND roomid=? AND floorid=?");
+                            stmt = conn.prepareStatement("SELECT * FROM BOOKINGS JOIN roomlisting USING (floorid,roomid) WHERE (checkindate BETWEEN ? AND ? OR checkoutdate BETWEEN ? AND ?) AND roomid=? AND floorid=?");
                             stmt.setString(1, newIn);
                             stmt.setString(2, newOut);
                             stmt.setString(3, newIn);
@@ -210,7 +210,7 @@ public class EditBookingsManager extends DataManager {
 
                     if (!booked) {
                         for (String room : rooms) {
-                            stmt = conn.prepareStatement("SELECT * FROM BOOKINGS JOIN roomlisting USING (floorid,roomid) WHERE checkindate BETWEEN ? AND ? AND checkoutdate BETWEEN ? AND ? AND roomid=? AND floorid=?");
+                            stmt = conn.prepareStatement("SELECT * FROM BOOKINGS JOIN roomlisting USING (floorid,roomid) WHERE (checkindate BETWEEN ? AND ? OR checkoutdate BETWEEN ? AND ?) AND roomid=? AND floorid=?");
                             stmt.setString(1, newIn);
                             stmt.setString(2, newOut);
                             stmt.setString(3, newIn);
