@@ -44,12 +44,16 @@
 	</script>
     </head>
     <body>
+        <!-- USES THE BEAN FROM HOME.JSP AND INITIALIZES BOOLEAN CONDITIONS USED TO DYNAMICALLY CHANGE CONTENT IN THE NAVIGATION BAR-->
         <jsp:useBean id="p" class="com.personalClasses.Person" scope="session" />
+        <!-- USES ROOM MANAGER FROM HOME.JSP TO DISPLAY LIST OF ROOMS -->
         <jsp:useBean id="man" class="database.manager.RoomManager" scope="session" />
+        <!-- INITIALIZES NEW BEAN USED TO PRODUCE REPORTS ON BOOKINGS, SALES, AND USERS -->
         <jsp:useBean id="rep" class="database.manager.ReportManager" scope="session" />
+        <!-- OPENS CONNECTION POOL AND CREATES NEW FORMATTER TO DISPLAY FLOATS TO TWO DECIMAL PLACES -->
         <%Room rm = null; rep.openPool();
             DecimalFormat df = new DecimalFormat("#.00");%>
-
+        <!-- ENSURES ONLY ADMIN ACCOUNTS CAN ACCESS THIS PAGE -->
         <% if (!p.getAdmin().equals("Y")) {
                 response.sendRedirect("home.jsp");
             }%>
@@ -131,6 +135,7 @@
                         <!-- start of view rooms -->
                         <div class="img-rounded roundedArea"> 
                             <h2> View Rooms </h2>
+                          <!-- DISPLAYS A LIST OF ALL ROOMS IN THE DATABASE -->
                         <%
                             int i = 0;
                             for (Room room : man.getAllTheRooms()) {%>
@@ -155,14 +160,18 @@
                             <h1> Edit Room</h1>                           
                             <p></p>
                             <h2> Search by: </h2>
+                            <!-- CREATES THE FORM THAT WILL ALLOW THE SEARCHING OF ROOMS -->
                             <%= man.makeEditSearchForm()%>
                             <%
+                            
                                 if (request.getParameter("idSearch") != null) {
                                     try {
+                                        //USES ROOM ID TO LOCATE DETAILS OF A SPECIFIC ROOM
                                         rm = man.getSpecificRoomByID(Integer.parseInt(request.getParameter("roomid")));
-
+                                        
                                         search = true;
                                         if (rm.getType() != null) {
+                             // CREATES THE FORM THAT WILL ALLOW THE EDITING OF ROOMS -->
                                             session.setAttribute("id", Integer.parseInt(request.getParameter("roomid")));%>
                             <%= man.makeEditRoomForm(rm.getType(), rm.getPrice(), rm.getDescription())%>
                             <%
@@ -174,9 +183,11 @@
                                 }
                             %>
                             <%
+                                //USES VALUES IN EDIT FORM TO APPROPRIATELY CHANGE THE VALUES OF THE SELECTED ROOM IN THE DATABASE
                                 if(request.getParameter("editEdit") != null){
                                     man.editRoom(request.getParameter("editRoomType"), Float.parseFloat(request.getParameter("editRoomPrice")), request.getParameter("editRoomDescription"),Integer.parseInt(session.getAttribute("id").toString()));
                                 }
+                                //DELETES SELECTED ROOM
                                 if (request.getParameter("editDelete") != null) {
                                     try {
                                         man.deleteRoom(Integer.parseInt(session.getAttribute("id").toString()));
@@ -192,9 +203,11 @@
                         <div class="img-rounded roundedArea">                          
                             <h1>Add New Room</h1>
                             <a name="addRoom"></a>
+                            <!-- CREATES THE FOR USED TO ADD NEW ROOMS TO THE BASE -->
                             <%= man.makeAddRoomForm()%>
                             <% if (request.getParameter("addRoom") != null) {
                                     try {
+                                    //USES VALUES FROM FORM TO ADD NEW ROOM TO THE DATABASE
                                         man.addNewRoom(request.getParameter("addRoomType"), Float.parseFloat(request.getParameter("addRoomPrice")), request.getParameter("addRoomDescription"));
                                     } catch (NumberFormatException e) {%>
                             <%= e.getMessage()%>

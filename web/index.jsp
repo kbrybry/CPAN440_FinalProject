@@ -3,7 +3,11 @@
     Created on : 16-Mar-2014, 1:31:11 AM
     Author     : seang_000
 --%>
+<%-- 
+    
+    THIS PAGE DISPLAYS SIGNS IN REGISTERED USERS
 
+--%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
@@ -23,8 +27,11 @@
   </head>
   <body>
     <div class="container">
+        <!-- CREATES THE BEAN USED TO HANDLE THE REGISTRATION AND AUTHENTICATION OF USERS-->
        <jsp:useBean id="db" class="database.manager.UserManager" scope="session" />
+       <!-- opens connection pool -->
        <% db.openPool(); %>
+      <!-- FORM USED TO RECEIVE VALUES TO AUTHENTICATE USER LOG IN -->
       <form class="form-signin" role="form" method="POST" action="home.html">
         <h2 class="form-signin-heading">Please sign in</h2>
         <input type="email" class="form-control" placeholder="Email address" name="email" required autofocus>
@@ -35,7 +42,9 @@
         
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <a href="register.jsp" class="btn btn-lg btn-primary btn-block">Register</a>
+        <!-- RECEIVES MESSAGE FROM SERVLET, DISPLAYS IT, THEN REMOVES IT FROM SESSION -->
         <label class="fail">
+         
             <% if (session.getAttribute("fail") != null){ %>
                 <%= session.getAttribute("fail") %>
             <%

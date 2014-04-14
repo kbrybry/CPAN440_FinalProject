@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 
 public class DataManager {
     
-    // connection to database
+    // fields of the class
     Context ctx; 
     DataSource ds;
     protected String error = "Nothing is wrong";
@@ -25,6 +25,7 @@ public class DataManager {
     String sql;
     ResultSet rs;
     
+    //constructor
     public DataManager(){}
 
     //accessor methods

@@ -43,14 +43,16 @@ public class ConfirmRegistration extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        //retrieves values from form
         String user = request.getParameter("email");
         String firstName = request.getParameter("first");
         String lastName = request.getParameter("last");
         String password = request.getParameter("pass");
         String confirm = request.getParameter("confirm");
-        
+        //retrieves bean from index.jsp
         UserManager db = (UserManager) request.getSession().getAttribute("db");
         try (PrintWriter out = response.getWriter()) {
+            //ensures password and confirm password fields are equal
             if(confirm.equals(password)){
                 if(db.createNewUser(user, firstName, lastName, password)){
                 HttpSession session = request.getSession();
@@ -59,12 +61,14 @@ public class ConfirmRegistration extends HttpServlet {
                 response.sendRedirect("registrationSuccess.jsp");
                 }
                 else{
+                //if passwords username already exists, user is redirected to registration fail page with the appropriate reasons why
                 HttpSession session = request.getSession();
                 String failMessage = db.getError();
                 session.setAttribute("fail", failMessage);
                 response.sendRedirect("registrationFailure.jsp");
                 }
             }//end of checking password matches
+            //if passwords dont match, user is redirected to registration fail page with the appropriate reasons why
             else if (!confirm.equals(password)){
                 HttpSession session = request.getSession();
                 String failMessage = "Passwords do not match!";

@@ -21,8 +21,10 @@
     </head>
     <body>
 
+        <!-- CREATES THE BEAN USED TO LIST ROOMS AND OPENS CONNECTION POOL-->
         <jsp:useBean id="man" class="database.manager.RoomManager" scope="session" />
         <% man.openPool(); %>
+        <!-- CREATES PERSON BEAN USED TO TRACK THE USER THROUGHOUT THE APPLICATION BASED ON INFORMATION SENT BY LOG IN SERVLET-->
         <jsp:useBean id="p" class="com.personalClasses.Person" scope="session" />
         <% if (session.getAttribute("user") != null) {%>
         <jsp:setProperty name="p" property="email"     value="<%= session.getAttribute("user")%>" />
@@ -35,6 +37,8 @@
         <jsp:setProperty name="p" property="firstName" value="GUEST"/>
         <jsp:setProperty name="p" property="lastName"  value="GUEST"/>
         <jsp:setProperty name="p" property="admin"  value="GUEST"/>
+        <!-- INITIALIZES BOOLEAN CONDITIONS USED TO DYNAMICALLY CHANGE CONTENT IN THE NAVIGATION BAR-->
+        <!-- DECIMAL FORMAT USED TO FORMAT PRICES -->
         <%
             }
         %>
@@ -47,6 +51,7 @@
             if (p.getAdmin().equals("Y")) {
                 admin = true;
             }
+            
             DecimalFormat df = new DecimalFormat("#.00");
         %>
         <div class="container">
@@ -61,6 +66,8 @@
 
                         <h1> View any of our spectacular rooms we offer!<%= "<a href=\"map.jsp\" class=\"btn btn-info btn-xs pull-right\">Find us!</a>"%></h1> 
 
+                        <!-- THIS CODE DISPLAYS ALL ROOMS WITH ITS DETAILS IN A PANEL -->
+                        <!-- EACH PANEL HAS A LINK TO THE BOOKINGS PAGE -->
                         <%
                             int i = 0;
                             for (Room room : man.getAllTheRooms()) {%>

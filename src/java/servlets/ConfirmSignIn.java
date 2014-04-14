@@ -37,14 +37,18 @@ public class ConfirmSignIn extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        //retrieves value from forms
         String user = request.getParameter("email");
         String password = request.getParameter("pass");
         
+        //retrieves bean from index.jsp
         UserManager db = (UserManager) request.getSession().getAttribute("db");
         try (PrintWriter out = response.getWriter()) {
         
+            //method that authenticates user
             if(db.authenticateUser(user, password)){
                 HttpSession session = request.getSession();
+                //user information is stores to populate bean on home.jsp
                 session.setAttribute("user", user);
                 session.setAttribute("first", db.getFirstName());
                 session.setAttribute("last", db.getLastName());
@@ -52,6 +56,7 @@ public class ConfirmSignIn extends HttpServlet {
                 response.sendRedirect("home.jsp");
             }
             else{
+                //error message if user or password is incorrect
                 HttpSession session = request.getSession();
                 session.setAttribute("fail", "Sorry! Invalid username or password! Try again.");
                 response.sendRedirect("index.jsp");

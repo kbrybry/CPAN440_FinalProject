@@ -11,6 +11,7 @@ package com.personalClasses;
  * @author seang_000
  */
 public class Room {
+    //fields of class based on Rooms data in database table Rooms
     String type,description;
     float price;
     int id;
@@ -23,6 +24,7 @@ public class Room {
         this.id = id;
     }
 
+    //constructor methods
     public Room(String type, String description, float price) {
         this.type = type;
         this.description = description;
@@ -31,6 +33,7 @@ public class Room {
 
     public Room(){};
     
+    //accessor methods
     public String getType() {
         return type;
     }

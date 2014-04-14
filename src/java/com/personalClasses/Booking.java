@@ -12,11 +12,14 @@ package com.personalClasses;
  */
 public class Booking {
     
+    //fields of class derived from database table information pertaining to bookings
     private int bookingno,floorid,roomid,guests;
     private String dateIn,dateOut,requests,userID;
     
+    //constructor methods
     public Booking(){}
 
+    //accessor methods
     public int getBookingno() {
         return bookingno;
     }

@@ -4,6 +4,10 @@
     Author     : seang_000
 --%>
 
+<!--
+    THIS PAGE IS USED TO SEND EMAILS TO THE HOTEL FOR QUESTIONS
+-->
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.io.*,java.util.*,javax.mail.*"%>
 <%@ page import="javax.mail.internet.*,javax.activation.*"%>
@@ -19,6 +23,7 @@
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     </head>
     <body>
+        <!-- USES THE BEAN FROM HOME.JSP AND INITIALIZES BOOLEAN CONDITIONS USED TO DYNAMICALLY CHANGE CONTENT IN THE NAVIGATION BAR-->
         <jsp:useBean id="p" class="com.personalClasses.Person" scope="session" />
         <% boolean guest = false;
             boolean admin = false;%>
@@ -56,6 +61,7 @@
                         </div>
                         <div class="col-md-8 column">
                             <div class="img-rounded" id="contactform">
+                                <!-- FORM USED TO RECEIVE INFORMATION TO SEND IN EMAIL -->
                                 <form class="form-horizontal" role="form" action="contact.jsp" method="POST">
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
@@ -89,20 +95,28 @@
                                     </div>
                                 </form>
                             </div>
+                                        
+                                        
+                             <%-- 
+                                    TAKES INFORMATION RECEIVED FROM FORM AND USES IT TO SEND EMAIL
+                             --%>           
+                            
                             <%
+                                 
                                 String result = "";
+                                //FILLS FIELDS NEEDED TO SEND EMAIL 
                                 String to = "kuyahotels@gmail.com";
                                 String from = request.getParameter("from");
                                 String subject = request.getParameter("subject");
                                 String reference = request.getParameter("reference");
                                 String messageText = request.getParameter("messageText");
-
+                                //USES SYSTEM PROPERTIES TO SET GMAIL SMPT
                                 Properties props = System.getProperties();
                                 props.put("mail.smtp.auth", "true");
                                 props.put("mail.smtp.starttls.enable", "true");
                                 props.put("mail.smtp.host", "smtp.gmail.com");
                                 props.put("mail.smtp.port", "587");
-
+                                //SETS E-MAIL ACCOUNT USED TO HOST THE MAIL SERVICE
                                 Session ses = Session.getInstance(props,
                                         new javax.mail.Authenticator() {
                                             protected PasswordAuthentication getPasswordAuthentication() {
@@ -110,8 +124,9 @@
                                             }
                                         });
                                 try {
-
+                                    //ENSURES ALL FIELDS NEEDED ARE FILLED
                                     if (from != null && subject != null && messageText != null) {
+                                        //CREATES NEW EMAIL MESSAGE AND SETS PARAMETERS REQUIRED FOR SENDING EMAIL
                                         MimeMessage message = new MimeMessage(ses);
                                         message.setFrom(new InternetAddress(from));
                                         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));

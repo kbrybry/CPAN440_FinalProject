@@ -36,19 +36,23 @@ public class Redirect extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-            
+            //this servlet handles the button clicking in the nav bar
             String home = request.getParameter("sign");
             String goAdmin = request.getParameter("goAdmin");
             String edit = request.getParameter("goEdit");
         try (PrintWriter out = response.getWriter()) {
+               //redirects to sign in page if user clicks sign out/in
                if (home!= null){
+               //deletes everything in the session to start fresh with new log in
                HttpSession session = request.getSession();
                session.invalidate();
                response.sendRedirect("index.jsp");
                }
+               //redirects to edit bookings page
                else if(edit != null){
                    response.sendRedirect("edit.jsp");
                }
+               //redirects to admin page
                else if(goAdmin != null){
                    response.sendRedirect("admin.jsp");
                }

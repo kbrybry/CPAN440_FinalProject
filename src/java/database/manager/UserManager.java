@@ -14,8 +14,10 @@ import java.sql.SQLException;
  */
 public class UserManager extends DataManager {
     
-        String email,firstName,lastName,admin;
+    //fields of the class
+    String email,firstName,lastName,admin;
 
+    //accessor methods
     public String getEmail() {
         return email;
     }
@@ -48,7 +50,7 @@ public class UserManager extends DataManager {
         this.admin = admin;
     }
     
-    
+    //constructor
     public UserManager(){
         super();
     }

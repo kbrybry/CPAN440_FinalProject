@@ -6,6 +6,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%-- 
+    
+    THIS PAGE DISPLAYS THE LOCATION OF THE HOTEL
+
+--%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,6 +20,7 @@
         <script type="text/javascript" src="jquery/jquery.min.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <!-- SCRIPT THAT LOADS GOOGLE MAP WITH CO ORDINATES OF HOTEL -->
         <script>
       function initialize() {
         var map_canvas = document.getElementById('map_canvas');
@@ -30,6 +36,7 @@
 
     </head>
     <body>
+        <!-- USES THE BEAN FROM HOME.JSP AND INITIALIZES BOOLEAN CONDITIONS USED TO DYNAMICALLY CHANGE CONTENT IN THE NAVIGATION BAR-->
         <jsp:useBean id="p" class="com.personalClasses.Person" scope="session" />
         <% boolean guest = false; boolean admin = false;%>
         <% if (p.getFirstName().equals("GUEST")) {
@@ -45,7 +52,7 @@
 	<!--   NAVIGATION START -->
             <%@include file="header.html" %>
         <!-- NAVIGATION END -->
-                                    <!--- START OF CONTACT INFO -->
+                                    <!--- MAP LOADS HERE -->
                                     <div class="row clearfix">
                                         <div class="col-md-12 column">
                                             <div id="map_canvas" class="img-rounded"></div>
@@ -53,7 +60,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- END OF CONTACT INFO -->
+                                    <!-- END OF MAP -->
 
                                     </div><!-- end of container -->
                                     </body>

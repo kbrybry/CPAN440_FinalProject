@@ -4,6 +4,15 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+
+<!--
+    THIS PAGE IS USED AS A PLACE HOLDER FOR THE NAVIGATION BAR FOR ALL WEB PAGES
+-->
+<%
+        String uri = request.getRequestURI();
+
+        String pageName = uri.substring(uri.lastIndexOf("/")+1);    
+        %>
 <div class="row clearfix">
                 <div class="col-md-12 column">
                     <nav class="navbar navbar-default navbar-inverse" role="navigation">
@@ -13,19 +22,19 @@ and open the template in the editor.
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li class="active">
+                                <li <% if(pageName.equals("") || pageName.equals("home.jsp")){ %> <%= "class=\"active\"" %>   <%}%>>
                                     <a href="home.jsp">Home</a>
                                 </li>
-                                <li >
+                                <li <% if(pageName.equals("gallery.jsp")){ %> <%= "class=\"active\"" %>   <%}%>>
                                     <a href="gallery.jsp">Gallery</a>
                                 </li>
-                                <li>
+                                <li <% if(pageName.equals("bookings.jsp")){ %> <%= "class=\"active\"" %>   <%}%>>
                                     <a href="bookings.jsp">Bookings</a>
                                 </li>
-                                <li>
+                                <li <% if(pageName.equals("contact.jsp")){ %> <%= "class=\"active\"" %>   <%}%>>
                                     <a href="contact.jsp">Contact Us</a>
                                 </li>
-                                <li>
+                                <li <% if(pageName.equals("map.jsp")){ %> <%= "class=\"active\"" %>   <%}%>>
                                     <a href="map.jsp">Map</a>
                                 </li>
                             </ul>

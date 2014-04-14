@@ -16,6 +16,7 @@
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     </head>
     <body>
+        <!-- USES THE BEAN FROM HOME.JSP AND INITIALIZES BOOLEAN CONDITIONS USED TO DYNAMICALLY CHANGE CONTENT IN THE NAVIGATION BAR-->
         <jsp:useBean id="p" class="com.personalClasses.Person" scope="session" />
         <% boolean guest = false;boolean admin = false; %>
    <% if (p.getFirstName().equals("GUEST")){
@@ -41,7 +42,7 @@
     <!--- Carousel Start -->
 <div class="row clearfix" >
 		<div class="col-md-12 column">
-			<div class="carousel slide" id="carousel-2426" id="mycarousel">
+			<div class="carousel slide" id="carousel-2426">
 				<ol class="carousel-indicators">
 					<li class="active" data-slide-to="0" data-target="#carousel-2426"></li>
 					<li data-slide-to="1" data-target="#carousel-2426"></li>

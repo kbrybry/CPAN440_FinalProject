@@ -16,14 +16,18 @@ import java.util.ArrayList;
  */
 public class ReportManager extends RoomManager {
 
+    //fields of the class
     Booking book;
 
+    //constructor
     public ReportManager() {
         super();
         book = new Booking();
     }
 
     ///////////////////FORM CREATION METHODS///////////////////////
+    
+    //method that creates a form that searches for room bookings based on date range
     public String makeRoomDateSearch() {
         form = "";
         form = "<form class=\"form-horizontal myForm\" role=\"form\" method=\"POST\" action=\"admin.jsp\">";
@@ -34,6 +38,7 @@ public class ReportManager extends RoomManager {
         return form;
     }
 
+    //method that creates a form that searches for room bookings based on date range and floor
     public String makeRoomDateAndFloorSearch() {
         form = "";
         form = "<form class=\"form-horizontal myForm\" role=\"form\" method=\"POST\" action=\"admin.jsp\">";
@@ -45,6 +50,7 @@ public class ReportManager extends RoomManager {
         return form;
     }
 
+    //method that creates a form that searches for sales based on date range
     public String makeSalesDateSearch() {
         form = "";
         form = "<form class=\"form-horizontal myForm\" role=\"form\" method=\"POST\" action=\"admin.jsp\">";
@@ -55,6 +61,7 @@ public class ReportManager extends RoomManager {
         return form;
     }
 
+    //method that creates a form that searches for sales based on date range and username
     public String makeSalesDateAndPersonSearch() {
         form = "";
         form = "<form class=\"form-horizontal myForm\" role=\"form\" method=\"POST\" action=\"admin.jsp\">";
@@ -71,6 +78,7 @@ public class ReportManager extends RoomManager {
     }
     /////////////////////QUERY METHODS///////////////////////
     
+    //this method returns a table with the information of all registered accounts excluding passwords in the database
     public String listAllUsers(){
         ArrayList<Person> persons = new ArrayList();
         String results="";
@@ -108,6 +116,7 @@ public class ReportManager extends RoomManager {
         return results;
     }
     
+    //returns all the registered usernames in the database
     public ArrayList<String> returnAllUserNames(){
         ArrayList<String> names = new ArrayList();
         try{
@@ -129,6 +138,7 @@ public class ReportManager extends RoomManager {
         return names;
     }
     
+    //returns a table with all sales information pertaining to a particular person and time based on date ranges and username
     public String getSalesDateAndPersonReport(String startDate, String endDate,String name) {
         ArrayList<Booking> bookings = new ArrayList();
         String results = "";
@@ -197,6 +207,7 @@ public class ReportManager extends RoomManager {
         return results;
     }
     
+    //returns a table with all sales information pertaining to a particular date range
     public String getSalesDateReport(String startDate, String endDate) {
         ArrayList<Booking> bookings = new ArrayList();
         String results = "";
@@ -263,6 +274,7 @@ public class ReportManager extends RoomManager {
         return results;
     }
 
+    //returns a table with all information pertaining to all bookings based on a date range.
     public String getRoomDateSearch(String startDate, String endDate) {
         ArrayList<Booking> bookings = new ArrayList();
         String results = "";
@@ -308,6 +320,7 @@ public class ReportManager extends RoomManager {
         return results;
     }
 
+    //returns a table with all booking information pertaining to a particular floor and time based on date ranges.
     public String getRoomDateAndFloorSearch(String startDate, String endDate, int floor) {
         ArrayList<Booking> bookings = new ArrayList();
         String results = "";
