@@ -50,7 +50,7 @@ public class Redirect extends HttpServlet {
                }
                //redirects to edit bookings page
                else if(edit != null){
-                   response.sendRedirect("edit.jsp");
+                   response.sendRedirect("editBookings.jsp");
                }
                //redirects to admin page
                else if(goAdmin != null){
