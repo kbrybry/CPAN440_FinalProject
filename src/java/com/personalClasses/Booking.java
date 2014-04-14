@@ -14,12 +14,21 @@ public class Booking {
     
     //fields of class derived from database table information pertaining to bookings
     private int bookingno,floorid,roomid,guests;
-    private String dateIn,dateOut,requests,userID;
+    private String dateIn,dateOut,requests,userID,type;
     
     //constructor methods
     public Booking(){}
 
     //accessor methods
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    
+    
     public int getBookingno() {
         return bookingno;
     }
